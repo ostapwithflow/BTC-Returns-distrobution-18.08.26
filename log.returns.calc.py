@@ -1,3 +1,5 @@
+
+
 print('fuck forex')
 
 import pandas as pd
@@ -20,8 +22,20 @@ df["log_return"] = np.log(
     df["close"] / df["close"].shift(1)
 )
 
+close_times = pd.to_datetime(
+    df["close_time"],
+    format="ISO8601",
+    utc=True,
+    errors="coerce",
+)
+
+is_one_minute = close_times.diff().between(
+    pd.Timedelta(seconds=59),
+    pd.Timedelta(seconds=61),
+)
+
 calculations = df.loc[
-    df["log_return"].notna(),
+    df["log_return"].notna() & is_one_minute,
     ["close", "close_time", "log_return"],
 ].copy()
 
@@ -32,8 +46,9 @@ calculations.to_csv(
     index=False,
 )
 
-#wc -l btc_log_returns.csv
-4701439 btc_log_returns.csv
 
-wc -l BTCUSDT-1m-merged.csv
-4701440 BTCUSDT-1m-merged.csv
+# Кількість рядків за wc -l, включно із заголовком:
+# Вхідний CSV:             4_701_440
+# Дохідності до фільтра:   4_701_439
+# Дохідності після:       4_701_389
+# Фільтр 59–61 с додатково відкинув 50 рядків.
