@@ -32,3 +32,8 @@ calculations.to_csv(
     index=False,
 )
 
+#wc -l btc_log_returns.csv
+4701439 btc_log_returns.csv
+
+wc -l BTCUSDT-1m-merged.csv
+4701440 BTCUSDT-1m-merged.csv
