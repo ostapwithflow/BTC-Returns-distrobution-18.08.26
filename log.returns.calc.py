@@ -1,9 +1,17 @@
+print('fuck forex')
+
+import pandas as pd
+import numpy as np
+
+FILE_NAME = "BTCUSDT-1m-merged.csv"
 
 df = pd.read_csv(
     FILE_NAME,
-    usecols=["Close"],
-).rename(columns={"Close": "close"})
-
+    usecols=["Close time", "Close"],
+).rename(columns={
+    "Close time": "close_time",
+    "Close": "close"
+})
 
 df["close"] = pd.to_numeric(df["close"], errors="coerce")
 
@@ -14,7 +22,7 @@ df["log_return"] = np.log(
 
 calculations = df.loc[
     df["log_return"].notna(),
-    ["close", "log_return"],
+    ["close", "close_time", "log_return"],
 ].copy()
 
 calculations["log_return_pct"] = calculations["log_return"] * 100
