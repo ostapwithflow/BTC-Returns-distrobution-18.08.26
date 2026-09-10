@@ -2,18 +2,17 @@ print("fuck forex")
 
 import numpy as np
 import pandas as pd
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
 import seaborn as sns
 import seaborn.objects as so
+
 
 FILENAME = "btc_log_returns.csv"
 DATE_COLUMN = "close_time"
 RETURNS_COLUMN = "log_return_pct"
 
-YEAR = 2021
+YEAR = 2017
 
 df = pd.read_csv(
     FILENAME,
@@ -22,6 +21,7 @@ df = pd.read_csv(
 ).set_index(DATE_COLUMN).sort_index()
 
 x = df.loc[str(YEAR), RETURNS_COLUMN].dropna()
+
 
 sns.histplot(x, bins=200)
 plt.title(f"{YEAR}")
