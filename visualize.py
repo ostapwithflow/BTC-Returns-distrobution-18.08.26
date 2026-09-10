@@ -9,28 +9,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import seaborn.objects as so
 
-FILE_NAME = "btc_log_returns.csv"
-RETURN_COLUMN = "log_return_pct"
+FILENAME = "btc_log_returns.csv"
+DATE_COLUMN = "close_time"
+RETURNS_COLUMN = "log_return_pct"
+
+YEAR = 2021
 
 df = pd.read_csv(
-    FILE_NAME,
-    usecols=[RETURN_COLUMN])
+    FILENAME,
+    usecols=[DATE_COLUMN, RETURNS_COLUMN],
+    parse_dates=[DATE_COLUMN],
+).set_index(DATE_COLUMN).sort_index()
 
-X_MIN, X_MAX = -7.5, 7.5
+x = df.loc[str(YEAR), RETURNS_COLUMN].dropna()
 
-fig, ax = plt.subplots(figsize=(14, 4))
-
-sns.histplot(
-    data=df,
-    x=RETURN_COLUMN,
-    bins=300,
-    binrange=(X_MIN, X_MAX),
-    ax=ax,
-)
-
-ax.set_xlim(X_MIN, X_MAX)
-
-fig.tight_layout()
-fig.savefig("btc_returns_distribution.png", dpi=300, bbox_inches="tight")
-
-
+sns.histplot(x, bins=200)
+plt.title(f"{YEAR}")
+plt.xlabel("%")
+plt.gca().spines["bottom"].set_visible(False) 
+plt.savefig(f"histogram_{YEAR}.png", dpi=300, bbox_inches="tight")  
