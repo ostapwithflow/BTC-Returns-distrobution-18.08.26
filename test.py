@@ -1,10 +1,10 @@
 from pathlib import Path
 import csv
 
-folder = Path("csv all")
+folder = Path(__file__).resolve().parent /"csv"/ "5m"
 
-files = sorted(folder.glob("BTCUSDT-1m-????-??.csv"))
-merged = folder / "BTCUSDT-1m-merged.csv"
+files = sorted(folder.glob("BTCUSDT-5m-????-??.csv"))
+merged = folder / "BTCUSDT-5m-merged.csv"
 
 
 def count_rows(path, has_header=False):
@@ -35,3 +35,7 @@ if original_count == merged_count:
 else:
     print("Кількість НЕ збігається — оригінали не видаляй.")
     print(f"Різниця: {merged_count - original_count:+,}")
+
+
+#1m - Збігається
+#5m - Збігається

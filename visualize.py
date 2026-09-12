@@ -1,3 +1,4 @@
+
 print("fuck forex")
 
 import numpy as np
