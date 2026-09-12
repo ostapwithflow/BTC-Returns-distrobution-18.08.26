@@ -13,7 +13,7 @@ FILENAME = "btc_log_returns.csv"
 DATE_COLUMN = "close_time"
 RETURNS_COLUMN = "log_return_pct"
 
-YEAR = 2017
+YEAR = 2026
 
 df = pd.read_csv(
     FILENAME,

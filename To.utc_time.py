@@ -3,7 +3,7 @@
 
 import pandas as pd
 
-FILE_NAME = "BTCUSDT-1m-merged.csv"
+FILE_NAME = "BTCUSDT-5m-merged.csv"
 
 # Читаємо всі колонки як текст, щоб зберегти інші значення.
 df = pd.read_csv(FILE_NAME, dtype=str, keep_default_na=False)
