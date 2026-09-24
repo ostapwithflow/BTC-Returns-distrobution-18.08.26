@@ -1,10 +1,13 @@
 
+#цей файл розраховує log returns та  фільтрує значення які не відповідають маштабу.
+
+
 print('fuck forex')
 
 import pandas as pd
 import numpy as np
 
-FILE_NAME = "BTCUSDT-5m-merged.csv"
+FILE_NAME = "BTCUSDT-15m-merged.csv"
 
 df = pd.read_csv(
     FILE_NAME,
@@ -29,8 +32,8 @@ close_times = pd.to_datetime(
 )
 
 is_five_minute = close_times.diff().between(
-    pd.Timedelta(seconds=299),
-    pd.Timedelta(seconds=301),
+    pd.Timedelta(seconds=899),
+    pd.Timedelta(seconds=901),
 )
 
 calculations = df.loc[
@@ -54,3 +57,8 @@ calculations.to_csv(
 #5m
 # Обєднаний csv - 940298 
 # Після фільтрації - 940248
+
+#15m
+# Обєднаний csv - 313439
+# Після фільтрації - 313391
+
