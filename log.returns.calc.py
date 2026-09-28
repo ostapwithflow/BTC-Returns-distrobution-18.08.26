@@ -7,7 +7,7 @@ print('fuck forex')
 import pandas as pd
 import numpy as np
 
-FILE_NAME = "BTCUSDT-1h-merged.csv"
+FILE_NAME = "BTCUSDT-1d-merged.csv"
 
 df = pd.read_csv(
     FILE_NAME,
@@ -32,8 +32,8 @@ close_times = pd.to_datetime(
 )
 
 is_five_minute = close_times.diff().between(
-    pd.Timedelta(seconds=3599),
-    pd.Timedelta(seconds=3601),
+    pd.Timedelta(seconds=86399),
+    pd.Timedelta(seconds=86401),
 )
 
 calculations = df.loc[
@@ -68,12 +68,12 @@ calculations.to_csv(
 
 #1h
 # Обєднаний csv - 78,373
-# після фільтрації - 78329
+# після фільтрації - 78,329
 
 #4h
 # Обєднаний csv - 19,608
-#
+# після фільтрації - 19,570
 
 #1d
 # Обєднаний csv - 3,271
-#
+# 
