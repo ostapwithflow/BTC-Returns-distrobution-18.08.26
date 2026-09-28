@@ -1,9 +1,9 @@
 from pathlib import Path
 import pandas as pd
 
-folder =Path(__file__).resolve().parent/"csv"/"30m"
+folder =Path(__file__).resolve().parent/"csv"/"1d"
 
-files = sorted(folder.glob("BTCUSDT-30m-????-??.csv"))
+files = sorted(folder.glob("BTCUSDT-1d-????-??.csv"))
 
 columns = [
     "Open time", "Open", "High", "Low", "Close", "Volume",
@@ -15,7 +15,7 @@ columns = [
 if not files:
     raise FileNotFoundError("Не знайдено місячних CSV для BTCUSDT")
 
-output = folder / "BTCUSDT-30m-merged.csv"
+output = folder / "BTCUSDT-1d-merged.csv"
 
 with output.open("x", encoding="utf-8", newline="") as result:
     for i, file in enumerate(files):
